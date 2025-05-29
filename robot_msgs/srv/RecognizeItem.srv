@@ -1,0 +1,7 @@
+# Request
+int32 parcel_id   # 탐색할 파셀의 ID
+bool return_home  # 파셀 위치 방문 후 시작 위치로 돌아갈지 여부
+---
+# Response
+bool success      # 네비게이션 요청 성공 여부
+string message    # 상태 메시지

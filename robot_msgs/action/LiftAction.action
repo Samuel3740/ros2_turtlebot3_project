@@ -1,0 +1,12 @@
+# Goal
+string command  # "up", "down", or "stop"
+float64 target_height
+---
+# Result
+bool success
+string message
+float64 final_height
+---
+# Feedback
+float64 current_height
+string current_state  # "moving_up", "moving_down", "stopped"
