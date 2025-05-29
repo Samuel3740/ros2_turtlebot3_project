@@ -68,9 +68,9 @@ bool RobotNavigation::navigateToCoordinate(double x, double y, double theta) {
   // 웨이포인트 설정
   std::vector<Waypoint> waypoints;
   waypoints.push_back({"시작 위치", 0.01, 0.0, 0.0});
-  waypoints.push_back({"경유 위치 A", 0.5, 0.0, 0.0}); // 경유 위치 A 추가
+  waypoints.push_back({"경유 위치 A", 0.65, 0.0, 0.0}); // 경유 위치 A 추가
   waypoints.push_back({"목표 위치", x, y, theta});
-  waypoints.push_back({"경유 위치 A", 0.5, 0.0, 0.0}); // 경유 위치 A 추가
+  waypoints.push_back({"경유 위치 A", 0.65, 0.0, 0.0}); // 경유 위치 A 추가
   waypoints.push_back({"시작 위치 (귀환)", 0.01, 0.0, 0.0});
 
   // 웨이포인트 네비게이터 설정

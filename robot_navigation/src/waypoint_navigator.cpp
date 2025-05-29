@@ -79,26 +79,34 @@ bool WaypointNavigator::loadWaypointsFromFile(const std::string& /* filePath */)
 }
 
 void WaypointNavigator::setHardcodedWaypoints() {
-  // Python 코드와 정확히 동일한 웨이포인트 설정
   waypoints_.clear();
   location_names_.clear();
 
-  // 웨이포인트 이름 설정
-  location_names_ = {"시작 위치", "경유 위치 A" ,"위치 1", "위치 2", "위치 3", "위치 4", "경유 위치 A" ,"시작 위치 (귀환)"};
+  // 이름: 총 8개
+  location_names_ = {
+    "시작 위치", 
+    "경유 위치 A", 
+    "위치 1", 
+    "위치 2", 
+    "위치 3", 
+    "위치 4", 
+    "경유 위치 A", 
+    "시작 위치 (귀환)"
+  };
 
-  // 웨이포인트 좌표 설정 - Python 코드와 동일하게
+  // 좌표: 총 8개 (위와 순서 및 개수 일치)
   std::vector<std::tuple<double, double, double>> coords = {
       std::make_tuple(0.01, 0.0, 0.0),        // 시작 위치
-      std::make_tuple(0.5, 0.0, 0.0),         // 경유 위치 A 임시 추가 위치
+      std::make_tuple(0.3, 0.0, 0.0),         // 경유 위치 A (수정된 좌표)
       std::make_tuple(0.5, 0.5, M_PI / 2),    // 위치 1
       std::make_tuple(0.8, 0.5, M_PI / 2),    // 위치 2
       std::make_tuple(0.8, -0.5, -M_PI / 2),  // 위치 3
       std::make_tuple(0.5, -0.5, -M_PI / 2),  // 위치 4
-      std::make_tuple(0.5, 0.0, 0.0),         // 경유 위치 A 임시 추가 위치
+      std::make_tuple(0.3, 0.0, 0.0),         // 경유 위치 A
       std::make_tuple(0.01, 0.0, 0.0)         // 시작 위치 (귀환)
   };
 
-  // 웨이포인트 배열 구성
+  // 로그와 Waypoint 배열 채우기
   for (size_t i = 0; i < coords.size(); i++) {
     Waypoint wp;
     wp.name = location_names_[i];
@@ -107,9 +115,11 @@ void WaypointNavigator::setHardcodedWaypoints() {
     wp.yaw = std::get<2>(coords[i]);
     waypoints_.push_back(wp);
 
-    RCLCPP_INFO(this->get_logger(), "웨이포인트 %zu: %s (x=%.2f, y=%.2f, 방향=%.1f°)", i + 1, wp.name.c_str(), wp.x, wp.y, wp.yaw * 180.0 / M_PI);
+    RCLCPP_INFO(this->get_logger(), "웨이포인트 %zu: %s (x=%.2f, y=%.2f, 방향=%.1f°)", 
+                i + 1, wp.name.c_str(), wp.x, wp.y, wp.yaw * 180.0 / M_PI);
   }
 }
+
 
 void WaypointNavigator::setWaypointsManually(const std::vector<Waypoint>& waypoints) {
   waypoints_ = waypoints;
